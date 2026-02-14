@@ -87,9 +87,13 @@ func renderClean(buf *bytes.Buffer, n *html.Node) {
 		}
 		cleanAttrs(n)
 		walkAndClean(n)
-		html.Render(buf, n)
+		if err := html.Render(buf, n); err != nil {
+			return
+		}
 	case html.TextNode:
-		html.Render(buf, n)
+		if err := html.Render(buf, n); err != nil {
+			return
+		}
 	default:
 		// drop comments, doctypes, etc.
 	}
@@ -134,7 +138,7 @@ func promoteChildren(parent, child *html.Node) {
 
 // cleanAttrs removes dangerous attributes from an element node.
 func cleanAttrs(n *html.Node) {
-	var kept []html.Attribute
+	kept := make([]html.Attribute, 0, len(n.Attr))
 	for _, attr := range n.Attr {
 		key := strings.ToLower(attr.Key)
 		if strings.HasPrefix(key, "on") {

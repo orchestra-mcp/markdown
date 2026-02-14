@@ -29,12 +29,12 @@ func (p *MarkdownPlugin) ConfigKey() string      { return "markdown" }
 
 func (p *MarkdownPlugin) DefaultConfig() map[string]any {
 	return map[string]any{
-		"sanitize_html":          true,
-		"enable_mermaid":         true,
-		"enable_math":            true,
+		"sanitize_html":            true,
+		"enable_mermaid":           true,
+		"enable_math":              true,
 		"enable_table_of_contents": true,
-		"max_input_size":         1048576,
-		"code_theme":             "monokai",
+		"max_input_size":           1048576,
+		"code_theme":               "monokai",
 	}
 }
 

@@ -16,7 +16,7 @@ func (p *MarkdownPlugin) RegisterRoutes(group fiber.Router) {
 
 func (p *MarkdownPlugin) handleRender(c fiber.Ctx) error {
 	var body struct {
-		Content string              `json:"content"`
+		Content string               `json:"content"`
 		Options *types.RenderOptions `json:"options,omitempty"`
 	}
 	if err := c.Bind().JSON(&body); err != nil {
